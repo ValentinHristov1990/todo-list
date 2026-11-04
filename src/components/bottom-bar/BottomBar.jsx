@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Appbar, FAB, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -6,7 +5,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const BOTTOM_APPBAR_HEIGHT = 80;
 const MEDIUM_FAB_HEIGHT = 56;
 
-export const BottomBar = () => {
+export const BottomBar = ({
+    openCreateTodoHandler,
+}) => {
     const { bottom } = useSafeAreaInsets();
     const theme = useTheme();
 
@@ -29,7 +30,7 @@ export const BottomBar = () => {
                 mode="flat"
                 size="medium"
                 icon="plus"
-                onPress={() => { }}
+                onPress={openCreateTodoHandler}
                 style={[
                     styles.fab,
                     { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
