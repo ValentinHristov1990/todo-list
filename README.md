@@ -6,11 +6,13 @@ This is mobile App for adding and managing todo list using React native and Expo
 
 For building this App was used following tools and libraries.
 
-- **Framework:**`[Expo](https://expo.dev/) (with template: `blank`)`
+- **Framework:** `[Expo](https://expo.dev/) (with template: `blank`)`
 
-- **UI library:**`react-native-paper`
+- **UI library:** `react-native-paper`
 
-- **Navigation / SafeArea:**`react-native-safe-area-context`
+- **Navigation / SafeArea:** `react-native-safe-area-context`
+
+- **Expo icons:** `@expo/vector-icons`
 
 ## Setup:
 
