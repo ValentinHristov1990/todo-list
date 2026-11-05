@@ -7,7 +7,13 @@ export const TodoContext = createContext({
     handleDismiss: () => { },
     openCreateTodoHandler: () => { },
     addTodo: (text) => [],
-    toggleTodo: (id) => { }
+    toggleTodo: (id) => { },
+    mode: 'view',
+    /**
+     * 
+     * @param {"view"|"edit"|"delete"} mode 
+     */
+    switchMode: (mode = 'view') => { }
 });
 
 export function TodoProvider({ children }) {
@@ -30,6 +36,7 @@ export function TodoProvider({ children }) {
         }
     ]);
     const [showCreateTodo, setShowCreateTodo] = useState(false);
+    const [mode, setMode] = useState("view");
 
     const handleDismiss = () => {
         setShowCreateTodo(false);
@@ -39,6 +46,14 @@ export function TodoProvider({ children }) {
         setShowCreateTodo(true);
     };
 
+    const switchMode = (newMode = 'view') => {
+        const validModes = ['view', 'edit', 'delete']
+
+        if (!validModes.includes(newMode)) {
+            return;
+        }
+        setMode(newMode === mode ? 'view' : newMode);
+    }
     const addTodo = (text) => {
         const newTodo = {
             id: uuid.v4(),
@@ -59,7 +74,9 @@ export function TodoProvider({ children }) {
         openCreateTodoHandler,
         todos,
         addTodo,
-        toggleTodo
+        toggleTodo,
+        mode,
+        switchMode
     }
     return (
         <TodoContext.Provider value={value}>
