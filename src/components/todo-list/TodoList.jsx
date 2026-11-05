@@ -23,6 +23,19 @@ export default function TodoList() {
                 break;
         }
     }
+
+    const getTodoIconName = (todo, mode) => {
+        switch (mode) {
+            case 'view':
+                return todo.completed ? 'check' : 'checkbox-blank-outline';
+            case 'edit':
+                return 'pencil';
+            case 'delete':
+                return 'delete'
+            default:
+                return 'check';
+        }
+    }
     return (
         <List.Section>
             {todos.map((todo) => (
@@ -30,7 +43,7 @@ export default function TodoList() {
                     key={todo.id}
                     {...todo}
                     onPress={() => onPressHandler(todo.id)}
-                    mode={mode}
+                    iconName={getTodoIconName(todo, mode)}
                 />
             ))}
         </List.Section>

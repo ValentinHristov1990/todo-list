@@ -7,6 +7,7 @@ export const TodoContext = createContext({
     handleDismiss: () => { },
     openCreateTodoHandler: () => { },
     addTodo: (text) => [],
+    deleteTodo: (id) => { },
     toggleTodo: (id) => { },
     mode: 'view',
     /**
@@ -60,8 +61,11 @@ export function TodoProvider({ children }) {
             text,
             completed: false,
         }
-
         setTodos(prevTodos => [...prevTodos, newTodo])
+    }
+
+    const deleteTodo = (id) => {
+        setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
     }
 
     const toggleTodo = (id) => {
@@ -74,6 +78,7 @@ export function TodoProvider({ children }) {
         openCreateTodoHandler,
         todos,
         addTodo,
+        deleteTodo,
         toggleTodo,
         mode,
         switchMode
