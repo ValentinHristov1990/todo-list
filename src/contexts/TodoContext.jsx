@@ -7,6 +7,7 @@ export const TodoContext = createContext({
     handleDismiss: () => { },
     openCreateTodoHandler: () => { },
     addTodo: (text) => [],
+    toggleTodo: (id) => { }
 });
 
 export function TodoProvider({ children }) {
@@ -48,12 +49,17 @@ export function TodoProvider({ children }) {
         setTodos(prevTodos => [...prevTodos, newTodo])
     }
 
+    const toggleTodo = (id) => {
+        setTodos(prevTodos => prevTodos.map(todo => todo.id === id ? { ...todo, completed: !todo.completed } : todo))
+    }
+
     const value = {
         showCreateTodo,
         handleDismiss,
         openCreateTodoHandler,
         todos,
-        addTodo
+        addTodo,
+        toggleTodo
     }
     return (
         <TodoContext.Provider value={value}>

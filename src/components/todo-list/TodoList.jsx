@@ -5,13 +5,14 @@ import TodoItem from "../todo-item/TodoItem";
 
 export default function TodoList() {
 
-    const { todos } = useContext(TodoContext);
+    const { todos, toggleTodo } = useContext(TodoContext);
     return (
         <List.Section>
             {todos.map((todo) => (
                 <TodoItem
                     key={todo.id}
                     {...todo}
+                    onPress={() => toggleTodo(todo.id)}
                 />
             ))}
         </List.Section>
