@@ -14,6 +14,8 @@ For building this App was used following tools and libraries.
 
 - **Expo icons:** `@expo/vector-icons`
 
+- **UUID** `react-native-uuid`
+
 ## Setup:
 
 1. **To install dependencies run in terminal:** `npm install`
