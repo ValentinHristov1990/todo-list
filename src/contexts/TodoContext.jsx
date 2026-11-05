@@ -11,7 +11,23 @@ export const TodoContext = createContext({
 
 export function TodoProvider({ children }) {
 
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState([
+        {
+            id: uuid.v4(),
+            text: 'First task',
+            completed: false
+        },
+        {
+            id: uuid.v4(),
+            text: 'Second task',
+            completed: false
+        },
+        {
+            id: uuid.v4(),
+            text: 'Third task',
+            completed: false
+        }
+    ]);
     const [showCreateTodo, setShowCreateTodo] = useState(false);
 
     const handleDismiss = () => {
