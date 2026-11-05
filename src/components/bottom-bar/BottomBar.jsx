@@ -1,15 +1,17 @@
+import { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { Appbar, FAB, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { TodoContext } from '../../contexts/TodoContext';
 
 const BOTTOM_APPBAR_HEIGHT = 80;
 const MEDIUM_FAB_HEIGHT = 56;
 
-export const BottomBar = ({
-    openCreateTodoHandler,
-}) => {
+export const BottomBar = () => {
     const { bottom } = useSafeAreaInsets();
     const theme = useTheme();
+    const { openCreateTodoHandler } = useContext(TodoContext);
+
 
     return (
         <Appbar
