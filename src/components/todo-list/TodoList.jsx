@@ -5,7 +5,7 @@ import TodoItem from "../todo-item/TodoItem";
 
 export default function TodoList() {
 
-    const { todos, toggleTodo, mode } = useContext(TodoContext);
+    const { todos, toggleTodo, mode, deleteTodo, editTodo } = useContext(TodoContext);
 
     const onPressHandler = (id) => {
         switch (mode) {
@@ -13,10 +13,10 @@ export default function TodoList() {
                 toggleTodo(id);
                 break;
             case 'edit':
-                // toggleTodo(id);
+                editTodo(id);
                 break;
             case 'delete':
-                // toggleTodo(id);
+                deleteTodo(id);
                 break;
 
             default:

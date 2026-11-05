@@ -8,13 +8,14 @@ export const TodoContext = createContext({
     openCreateTodoHandler: () => { },
     addTodo: (text) => [],
     deleteTodo: (id) => { },
+    editTodo: (id) => { },
     toggleTodo: (id) => { },
     mode: 'view',
     /**
      * 
      * @param {"view"|"edit"|"delete"} mode 
      */
-    switchMode: (mode = 'view') => { }
+    switchMode: (mode = 'view') => { },
 });
 
 export function TodoProvider({ children }) {
@@ -38,6 +39,7 @@ export function TodoProvider({ children }) {
     ]);
     const [showCreateTodo, setShowCreateTodo] = useState(false);
     const [mode, setMode] = useState("view");
+    const [selectedTodo, setSelectedTodo] = useState(null);
 
     const handleDismiss = () => {
         setShowCreateTodo(false);
@@ -56,6 +58,17 @@ export function TodoProvider({ children }) {
         setMode(newMode === mode ? 'view' : newMode);
     }
     const addTodo = (text) => {
+
+        if (selectedTodo) {
+            setTodos(prevTodos =>
+                prevTodos.map(todo =>
+                    todo.id === selectedTodo.id ? { ...todo, text } : todo
+                )
+            );
+            setSelectedTodo(null);
+            return;
+        };
+
         const newTodo = {
             id: uuid.v4(),
             text,
@@ -68,8 +81,17 @@ export function TodoProvider({ children }) {
         setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
     }
 
+    const editTodo = (id) => {
+        setSelectedTodo(todos.find(todo => todo.id === id));
+        setShowCreateTodo(true)
+    }
+
     const toggleTodo = (id) => {
-        setTodos(prevTodos => prevTodos.map(todo => todo.id === id ? { ...todo, completed: !todo.completed } : todo))
+        setTodos(prevTodos =>
+            prevTodos.map(todo =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            )
+        );
     }
 
     const value = {
@@ -80,8 +102,10 @@ export function TodoProvider({ children }) {
         addTodo,
         deleteTodo,
         toggleTodo,
+        editTodo,
         mode,
-        switchMode
+        switchMode,
+        selectedTodo: selectedTodo,
     }
     return (
         <TodoContext.Provider value={value}>

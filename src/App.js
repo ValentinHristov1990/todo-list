@@ -15,11 +15,8 @@ export default function App() {
         <StatusBar style="auto" />
         <View style={{ flex: 1 }}>
           <TopBar />
-
           <CreateTodo />
-
           <TodoList />
-
           <BottomBar />
         </View>
       </TodoProvider>
